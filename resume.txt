@@ -1,0 +1,46 @@
+Manas Bhatia
+manasbhatia724@gmail.com | LinkedIn | GitHub | manasbhatia.me | +91 87089 86724
+Education
+Punjab Engineering College (Deemed to be University) Chandigarh, India
+B.Tech in Electrical Engineering, Minor in CSE (Artificial Intelligence), CGPA: 8.00 Aug. 2023 – May 2027
+SD Public School Yamuna Nagar, Haryana
+Senior Secondary Education – 91.6% Mar. 2021 – Mar. 2023
+Skills
+Programming Languages: Python, TypeScript, JavaScript, SQL, Java
+AI/ML & Cloud: Azure OpenAI, Google Gemini API, Vector Embeddings, RAG, AWS (EC2, S3, Amplify,
+CloudFront)
+Frameworks & Tools: Next.js, React Native, FastAPI, Supabase, Node.js, Bun, Tailwind CSS
+Databases: MongoDB, DynamoDB, Redis, MySQL, Google Firebase
+CS Fundamentals: Data Structures and Algorithms, DBMS, OOP, Operating Systems, Linux
+Experience
+Humara Pandit Jan. 2026 – Present
+Technical Lead
+– AI Mobile App & Infrastructure: Engineered a React Native app with a FastAPI backend deployed on AWS
+EC2, implementing a RAG pipeline via Azure OpenAI. Architected multi-profile authentication and a centralized
+Redis payment session loop to optimize transaction routing.
+– B2B API & Partner Integrations: Developed a Supabase-backed REST API (GET/POST/PATCH) enabling
+external partners to list products and sync order and payment statuses. Built an internal order management panel
+and collaborated directly wcith external technical leads to ensure seamless cross-platform integration.
+– Operations Engineering & Web Platforms: Deployed high-speed Next.js web apps on AWS Amplify,
+overcoming sub-10% conversion rates to drive 1.5 Lakh in monthly revenue. Built an internal MongoDB-based sales
+tool integrating Zoho Billing, Delhivery, and Shadowfax APIs to automate invoicing and cross-platform logistics
+scheduling.
+Projects
+Alignify | React, Google Gemini API W
+– Built an AI-powered resume reviewer using the Gemini API to provide job-specific suggestions, scoring, and
+keyword insights with deep contextual awareness.
+E-Summit’25 Website | React, Google Firebase W
+– Architected the official registration portal for PEC’s flagship E-Summit, integrating Firebase for real-time
+operations to serve over 2,000 participants and 1,000+ concurrent users.
+Positions of Responsibility
+Vice President June 2025 – Present
+IMAGES (NGO by PEC Students)
+– Led community outreach programs benefiting 200+ individuals and managed logistics and fundraising by
+coordinating with senior stakeholders to ensure successful execution.
+Lead Coordinator Aug. 2024 – Present
+Hindi Editorial Board, PEC
+– Led cross-functional collaboration with poets, faculty, and logistics teams to execute Hindi Diwas, engaging 250+
+participants and promoting cultural inclusion.
+Achievements
+• Special Mention, Ideathon 4.0 by ACM-PEC for UniMart – a peer-to-peer delivery platform.
+• Certificate of Appreciation from PEC for event management and cultural involvemen
