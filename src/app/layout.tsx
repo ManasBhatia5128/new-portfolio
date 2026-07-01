@@ -23,13 +23,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Manas Bhatia — SDE & Technical Lead",
+  title: "Manas Bhatia — Software Development Engineer",
   description:
     "Full-stack engineer specializing in Next.js, FastAPI, and AWS cloud infrastructure. Building high-performance web platforms and AI-powered products.",
   keywords: [
     "Manas Bhatia",
     "Software Engineer",
-    "Technical Lead",
     "Next.js",
     "React",
     "FastAPI",
@@ -38,7 +37,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Manas Bhatia" }],
   openGraph: {
-    title: "Manas Bhatia — SDE & Technical Lead",
+    title: "Manas Bhatia — Software Development Engineer",
     description:
       "Full-stack engineer specializing in Next.js, FastAPI, and AWS cloud infrastructure.",
     type: "website",

@@ -65,7 +65,7 @@ export interface BlogPost {
 
 export const personalInfo: PersonalInfo = {
   name: "Manas Bhatia",
-  title: "Software Development Engineer & Technical Lead",
+  title: "Software Development Engineer",
   email: "manasbhatia724@gmail.com",
   phone: "+91 87089 86724",
   website: "manasbhatia.me",
@@ -136,7 +136,7 @@ export const skills: SkillCategory[] = [
 export const experience: ExperienceEntry[] = [
   {
     company: "Humara Pandit",
-    role: "Technical Lead",
+    role: "SDE Intern",
     duration: "Jan 2026 – Present",
     logo: "/images/hp_logo.png",
     bullets: [
