@@ -149,6 +149,22 @@ export const experience: ExperienceEntry[] = [
 
 export const projects: ProjectEntry[] = [
   {
+    title: "Gemstone Consultation Landing Page",
+    tech: ["Next.js", "DynamoDB"],
+    link: "https://gems.humarapandit.com",
+    cover: "/images/gems_hp.png",
+    description:
+      "Driven 1L+ monthly revenue across multiple meta ad campaigns. (Made during my tenure at Humara Pandit)",
+  },
+  {
+    title: "AI Astrologer (Humara Pandit App)",
+    tech: ["React Native", "FastAPI", "AWS EC2", "AWS S3", "CloudFront"],
+    link: "https://play.google.com/store/apps/details?id=com.humarapandit.tejasai",
+    cover: "/images/astro_hp.png",
+    description:
+      "AI Astrologer predictions based on chart data derived from birth details. (Made during my tenure at Humara Pandit)",
+  },
+  {
     title: "Alignify",
     tech: ["React", "Google Gemini API"],
     link: "#",
