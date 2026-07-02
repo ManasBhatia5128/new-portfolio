@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useTheme } from "@/components/theme-provider";
 import { List } from "@phosphor-icons/react";
 import { NAV_LINKS } from "@/lib/theme";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -12,6 +13,12 @@ import { cn } from "@/lib/utils";
 export function Navbar() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <>
@@ -25,7 +32,15 @@ export function Navbar() {
             href="/"
             className="group flex items-center gap-2 text-sm font-bold tracking-tight text-foreground transition-colors"
           >
-            <span className="text-primary font-mono">~/</span>
+            {mounted ? (
+              <img
+                src={theme === "dark" ? "/images/logo_dark_mode.png" : "/images/logo_light_mode.png"}
+                alt="Manas Bhatia Logo"
+                className="h-10 w-auto object-contain transition-transform group-hover:scale-105"
+              />
+            ) : (
+              <div className="h-10 w-10" />
+            )}
             <span className="group-hover:text-primary transition-colors duration-200">
               manas
             </span>

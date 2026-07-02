@@ -42,6 +42,24 @@ export const metadata: Metadata = {
       "Full-stack engineer specializing in Next.js, FastAPI, and AWS cloud infrastructure.",
     type: "website",
     url: "https://manasbhatia.me",
+    images: [
+      {
+        url: "/images/logo_light_mode.png",
+        width: 1200,
+        height: 630,
+        alt: "Manas Bhatia",
+      },
+    ],
+  },
+  icons: {
+    icon: [
+      { url: "/images/logo_light_mode.ico?v=2", media: "(prefers-color-scheme: light)", sizes: "any" },
+      { url: "/images/logo_dark_mode.ico?v=2", media: "(prefers-color-scheme: dark)", sizes: "any" },
+    ],
+    apple: [
+      { url: "/images/logo_light_mode.png?v=2", media: "(prefers-color-scheme: light)" },
+      { url: "/images/logo_dark_mode.png?v=2", media: "(prefers-color-scheme: dark)" },
+    ],
   },
 };
 
@@ -63,6 +81,17 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(c,l,a,r,i,t,y){
+                  c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                  t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                  y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+              })(window, document, "clarity", "script", "xg15vzz0bq");
+            `,
+          }}
+        />
         {/* Devicon — technology logo icon font */}
         <link
           rel="stylesheet"
