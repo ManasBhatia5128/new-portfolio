@@ -110,7 +110,7 @@ export default function HomePage() {
         <FadeInStagger staggerDelay={0.2}>
           {experience.slice(0, 1).map((entry) => (
             <FadeInStaggerItem key={entry.company}>
-              <div className="rounded-lg border border-border/60 bg-card/50 p-5 transition-all duration-200 hover:border-border hover:shadow-sm">
+              <div className="rounded-lg border border-border/60 bg-card/50 backdrop-blur-sm p-5 transition-all duration-200 hover:border-border hover:shadow-sm">
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-1 mb-4">
                   <div className="flex items-center gap-3">
                     {entry.logo && (
@@ -216,7 +216,7 @@ export default function HomePage() {
         <FadeInStagger staggerDelay={0.1} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {skills.map((category) => (
             <FadeInStaggerItem key={category.category}>
-              <div className="h-full rounded-lg border border-border/60 bg-card/50 p-4 transition-colors hover:border-border">
+              <div className="h-full rounded-lg border border-border/60 bg-card/50 backdrop-blur-sm p-4 transition-colors hover:border-border">
                 <h3 className="text-[11px] font-bold uppercase tracking-[0.15em] text-primary mb-3">
                   {category.category}
                 </h3>

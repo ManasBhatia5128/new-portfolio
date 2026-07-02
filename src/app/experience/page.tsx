@@ -32,7 +32,7 @@ export default function ExperiencePage() {
             </div>
 
             {/* Card */}
-            <div className="rounded-lg border border-border/60 bg-card/50 p-5 transition-all duration-200 hover:border-border hover:shadow-sm">
+            <div className="rounded-lg border border-border/60 bg-card/50 backdrop-blur-sm p-5 transition-all duration-200 hover:border-border hover:shadow-sm">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-1 mb-4">
                 <div className="flex items-center gap-3">
                   {entry.logo && (
@@ -96,7 +96,7 @@ export default function ExperiencePage() {
               <div className="h-1.5 w-1.5 rounded-full bg-muted-foreground/40" />
             </div>
 
-            <div className="rounded-lg border border-border/60 bg-card/50 p-5 transition-all duration-200 hover:border-border hover:shadow-sm">
+            <div className="rounded-lg border border-border/60 bg-card/50 backdrop-blur-sm p-5 transition-all duration-200 hover:border-border hover:shadow-sm">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-1 mb-3">
                 <div className="flex items-center gap-3">
                   {pos.logo && (
@@ -153,7 +153,7 @@ export default function ExperiencePage() {
         {achievements.map((item, i) => (
           <div
             key={i}
-            className="flex items-start gap-3 rounded-lg border border-border/60 bg-card/50 p-4 transition-colors hover:border-border"
+            className="flex items-start gap-3 rounded-lg border border-border/60 bg-card/50 backdrop-blur-sm p-4 transition-colors hover:border-border"
           >
             <Trophy
               size={16}

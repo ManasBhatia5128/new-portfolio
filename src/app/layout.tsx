@@ -23,6 +23,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://manasbhatia.me"),
   title: "Manas Bhatia — Software Development Engineer",
   description:
     "Full-stack engineer specializing in Next.js, FastAPI, and AWS cloud infrastructure. Building high-performance web platforms and AI-powered products.",

@@ -7,10 +7,31 @@ import {
   Phone,
   PaperPlaneTilt,
 } from "@phosphor-icons/react";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { personalInfo } from "@/lib/data";
 import { SectionHeader } from "@/components/section-header";
 import { cn } from "@/lib/utils";
+import { sendContactEmail } from "@/actions/contact";
+
+function ErrorTooltip({ message, isTextArea = false }: { message: string, isTextArea?: boolean }) {
+  return (
+    <div className={cn("absolute right-3 z-20 animate-in fade-in zoom-in-95 duration-200", isTextArea ? "top-3" : "top-1/2 -translate-y-1/2")}>
+      <div className="flex h-5 w-5 cursor-help items-center justify-center rounded-full bg-destructive text-destructive-foreground shadow-sm">
+        <span className="text-xs font-bold">!</span>
+      </div>
+      <div className={cn(
+        "pointer-events-none absolute right-[-8px] w-max max-w-[220px] rounded-md bg-foreground px-3 py-2 text-xs text-background shadow-xl",
+        isTextArea ? "top-full mt-2" : "bottom-full mb-2"
+      )}>
+        {message}
+        <div className={cn(
+          "absolute right-2 h-2 w-2 rotate-45 bg-foreground",
+          isTextArea ? "-top-1" : "-bottom-1"
+        )}></div>
+      </div>
+    </div>
+  );
+}
 
 interface ContactLink {
   href: string;
@@ -30,13 +51,13 @@ const contactLinks: ContactLink[] = [
     href: personalInfo.linkedin,
     icon: LinkedinLogo,
     label: "LinkedIn",
-    value: "linkedin.com/in/manasbhatia",
+    value: "linkedin.com/in/manas-bhatia",
   },
   {
     href: personalInfo.github,
     icon: GithubLogo,
     label: "GitHub",
-    value: "github.com/manasbhatia",
+    value: "github.com/manasbhatia5128",
   },
   {
     href: `tel:${personalInfo.phone}`,
@@ -47,7 +68,7 @@ const contactLinks: ContactLink[] = [
 ];
 
 const inputClasses = cn(
-  "w-full rounded-md border border-border/60 bg-muted/30 px-3 py-2.5",
+  "w-full rounded-md border border-gray-600 border-width-4 bg-muted/30 px-3 py-2.5",
   "text-sm text-foreground placeholder:text-muted-foreground/50",
   "transition-colors duration-200",
   "focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/20"
@@ -55,11 +76,47 @@ const inputClasses = cn(
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string[]>>({});
+  const [globalError, setGlobalError] = useState("");
+  const [isPending, startTransition] = useTransition();
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    if (errors[name]) {
+      setErrors((prev) => ({ ...prev, [name]: [] }));
+    }
+  };
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    // Placeholder — wire to Server Action or API route
-    setSubmitted(true);
+    startTransition(async () => {
+      setErrors({});
+      setGlobalError("");
+      
+      const formDataToSend = new FormData();
+      Object.entries(formData).forEach(([key, value]) => formDataToSend.append(key, value));
+
+      const result = await sendContactEmail(formDataToSend);
+
+      if (result.success) {
+        setSubmitted(true);
+        setFormData({ name: "", email: "", subject: "", message: "" });
+      } else {
+        if (result.errors) {
+          setErrors(result.errors);
+        } else if (result.message) {
+          setGlobalError(result.message);
+        }
+      }
+    });
   }
 
   return (
@@ -71,7 +128,7 @@ export default function ContactPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
         {/* ── Contact Form ──────────────────────────────────────── */}
-        <div className="rounded-lg border border-border/60 bg-card/50 p-6">
+        <div className="rounded-lg border border-border/60 bg-card/50 backdrop-blur-sm p-6">
           {submitted ? (
             <div className="flex flex-col items-center justify-center h-full min-h-[320px] text-center">
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 mb-4">
@@ -96,6 +153,12 @@ export default function ContactPage() {
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
+              {globalError && (
+                <div className="rounded-md bg-destructive/10 p-3 text-xs text-destructive border border-destructive/20">
+                  {globalError}
+                </div>
+              )}
+              
               <div>
                 <label
                   htmlFor="contact-name"
@@ -103,15 +166,22 @@ export default function ContactPage() {
                 >
                   Name
                 </label>
-                <input
-                  id="contact-name"
-                  name="name"
-                  type="text"
-                  required
-                  placeholder="Your name"
-                  className={inputClasses}
-                />
+                <div className="relative">
+                  <input
+                    id="contact-name"
+                    name="name"
+                    type="text"
+                    required
+                    disabled={isPending}
+                    value={formData.name}
+                    onChange={handleChange}
+                    placeholder="Your name"
+                    className={cn(inputClasses, errors.name && "border-destructive/50 focus:border-destructive pr-10")}
+                  />
+                  {errors.name && <ErrorTooltip message={errors.name[0]} />}
+                </div>
               </div>
+              
               <div>
                 <label
                   htmlFor="contact-email"
@@ -119,15 +189,22 @@ export default function ContactPage() {
                 >
                   Email
                 </label>
-                <input
-                  id="contact-email"
-                  name="email"
-                  type="email"
-                  required
-                  placeholder="you@example.com"
-                  className={inputClasses}
-                />
+                <div className="relative">
+                  <input
+                    id="contact-email"
+                    name="email"
+                    type="email"
+                    required
+                    disabled={isPending}
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="you@example.com"
+                    className={cn(inputClasses, errors.email && "border-destructive/50 focus:border-destructive pr-10")}
+                  />
+                  {errors.email && <ErrorTooltip message={errors.email[0]} />}
+                </div>
               </div>
+              
               <div>
                 <label
                   htmlFor="contact-subject"
@@ -135,15 +212,22 @@ export default function ContactPage() {
                 >
                   Subject
                 </label>
-                <input
-                  id="contact-subject"
-                  name="subject"
-                  type="text"
-                  required
-                  placeholder="What's this about?"
-                  className={inputClasses}
-                />
+                <div className="relative">
+                  <input
+                    id="contact-subject"
+                    name="subject"
+                    type="text"
+                    required
+                    disabled={isPending}
+                    value={formData.subject}
+                    onChange={handleChange}
+                    placeholder="What's this about?"
+                    className={cn(inputClasses, errors.subject && "border-destructive/50 focus:border-destructive pr-10")}
+                  />
+                  {errors.subject && <ErrorTooltip message={errors.subject[0]} />}
+                </div>
               </div>
+              
               <div>
                 <label
                   htmlFor="contact-message"
@@ -151,21 +235,29 @@ export default function ContactPage() {
                 >
                   Message
                 </label>
-                <textarea
-                  id="contact-message"
-                  name="message"
-                  required
-                  rows={5}
-                  placeholder="Your message..."
-                  className={cn(inputClasses, "resize-none")}
-                />
+                <div className="relative">
+                  <textarea
+                    id="contact-message"
+                    name="message"
+                    required
+                    disabled={isPending}
+                    value={formData.message}
+                    onChange={handleChange}
+                    rows={5}
+                    placeholder="Your message..."
+                    className={cn(inputClasses, "resize-none", errors.message && "border-destructive/50 focus:border-destructive pr-10")}
+                  />
+                  {errors.message && <ErrorTooltip message={errors.message[0]} isTextArea />}
+                </div>
               </div>
+              
               <button
                 type="submit"
-                className="flex w-full items-center justify-center gap-2 rounded-md bg-primary px-4 py-2.5 text-xs font-bold text-primary-foreground transition-all duration-200 hover:opacity-90 active:scale-[0.98]"
+                disabled={isPending}
+                className="flex w-full items-center justify-center gap-2 rounded-md bg-primary px-4 py-2.5 text-xs font-bold text-primary-foreground transition-all duration-200 hover:opacity-90 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                <PaperPlaneTilt size={14} weight="bold" />
-                Send Message
+                <PaperPlaneTilt size={14} weight="bold" className={cn(isPending && "animate-pulse")} />
+                {isPending ? "Sending..." : "Send Message"}
               </button>
             </form>
           )}
@@ -187,7 +279,7 @@ export default function ContactPage() {
                   ? "noopener noreferrer"
                   : undefined
               }
-              className="group flex items-center gap-4 rounded-lg border border-border/60 bg-card/50 p-4 transition-all duration-200 hover:border-primary/30 hover:bg-primary/5 hover:shadow-sm"
+              className="group flex items-center gap-4 rounded-lg border border-border/60 bg-card/50 backdrop-blur-sm p-4 transition-all duration-200 hover:border-primary/30 hover:bg-primary/5 hover:shadow-sm"
             >
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-muted/50 text-muted-foreground transition-colors group-hover:bg-primary/10 group-hover:text-primary">
                 <link.icon size={18} weight="bold" />
@@ -202,7 +294,7 @@ export default function ContactPage() {
           ))}
 
           {/* Availability status */}
-          <div className="mt-6 rounded-lg border border-border/60 bg-card/50 p-4">
+          <div className="mt-6 rounded-lg border border-border/60 bg-card/50 backdrop-blur-sm p-4">
             <div className="flex items-center gap-2 mb-2">
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-75" />

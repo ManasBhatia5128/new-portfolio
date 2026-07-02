@@ -33,7 +33,7 @@ export default async function BlogPage() {
             const readingTime = Math.ceil((post.content?.split(' ').length || 0) / 200) + ' min read';
             
             return (
-              <Link href={`/blog/${post.slug}`} key={post.slug} className="block group relative rounded-lg border border-transparent px-5 py-5 transition-all duration-200 hover:border-border/60 hover:bg-card/50">
+              <Link href={`/blog/${post.slug}`} key={post.slug} className="block group relative rounded-lg border border-transparent px-5 py-5 transition-all duration-200 hover:border-border/60 hover:bg-card/50 hover:backdrop-blur-sm">
                 <article>
                   <div className="flex flex-col md:flex-row md:items-start md:gap-6">
                     {/* Date column */}
@@ -97,7 +97,7 @@ export default async function BlogPage() {
       </div>
 
       {/* Terminal-style coming soon */}
-      <div className="mt-12 rounded-lg border border-border/60 bg-card/50 p-6">
+      <div className="mt-12 rounded-lg border border-border/60 bg-card/50 backdrop-blur-sm p-6">
         <div className="flex items-center gap-1.5 mb-4">
           <div className="h-2.5 w-2.5 rounded-full bg-destructive/60" />
           <div className="h-2.5 w-2.5 rounded-full bg-chart-4" />

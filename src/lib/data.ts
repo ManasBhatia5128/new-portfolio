@@ -74,7 +74,7 @@ export const personalInfo: PersonalInfo = {
 };
 
 export const profileSummary =
-  "Full-stack engineer with deep expertise in MERN, Next.js, and FastAPI, specializing in B2B API integrations, cloud-native infrastructure on AWS (EC2, S3, Amplify, CloudFront), and AI-powered product development using RAG pipelines with Azure OpenAI. Technical lead driving 1.5L+ monthly revenue through high-speed web platforms and cross-platform logistics automation.";
+  "Full-stack engineer with experience in MERN, Next.js, and FastAPI, specializing in B2B API integrations, cloud-native infrastructure on AWS (EC2, S3, Amplify, CloudFront), and AI-powered product development using RAG pipelines with Azure OpenAI.";
 
 export const education: Education[] = [
   {
@@ -96,36 +96,42 @@ export const education: Education[] = [
 export const skills: SkillCategory[] = [
   {
     category: "Languages",
-    items: ["Python", "TypeScript", "JavaScript", "SQL", "Java"],
+    items: ["Python", "TypeScript", "JavaScript", "Java", "SQL"],
   },
   {
-    category: "Frameworks & Tools",
+    category: "Frameworks & Runtimes",
     items: [
       "Next.js",
       "React Native",
       "FastAPI",
-      "Supabase",
       "Node.js",
       "Bun",
       "Tailwind CSS",
     ],
   },
   {
-    category: "AI/ML & Cloud",
+    category: "Cloud & BaaS",
     items: [
-      "Azure OpenAI",
-      "Google Gemini API",
-      "Vector Embeddings",
-      "RAG",
       "AWS EC2",
       "AWS S3",
       "AWS Amplify",
       "CloudFront",
+      "Supabase",
+      "Google Firebase",
     ],
   },
   {
-    category: "Databases",
-    items: ["MongoDB", "DynamoDB", "Redis", "MySQL", "Google Firebase"],
+    category: "AI & Databases", 
+    items: [
+      "MongoDB", 
+      "DynamoDB", 
+      "Redis", 
+      "MySQL",
+      "Azure OpenAI",
+      "Google Gemini API",
+      "Vector Embeddings",
+      "RAG",
+    ],
   },
   {
     category: "CS Fundamentals",
@@ -142,7 +148,8 @@ export const experience: ExperienceEntry[] = [
     bullets: [
       "Engineered a React Native app with a FastAPI backend deployed on AWS EC2, implementing a RAG pipeline via Azure OpenAI. Architected multi-profile authentication and a centralized Redis payment session loop to optimize transaction routing.",
       "Developed a Supabase-backed REST API (GET/POST/PATCH) enabling external partners to list products and sync order and payment statuses. Built an internal order management panel and collaborated directly with external technical leads for seamless cross-platform integration.",
-      "Deployed high-speed Next.js web apps on AWS Amplify, overcoming sub-10% conversion rates to drive 1.5 Lakh in monthly revenue. Built an internal MongoDB-based sales tool integrating Zoho Billing, Delhivery, and Shadowfax APIs to automate invoicing and cross-platform logistics scheduling.",
+      "Architected a high-speed gemstone consultation landing page using Next.js, AWS Amplify, and DynamoDB, overcoming low conversion rates to drive ₹1 Lakh+ in monthly revenue.",
+      "Engineered an internal sales and operations tool with an automated \"Create and Schedule\" order flow, integrating Zoho Billing, Delhivery, and Shadowfax APIs to reduce manual overhead by 90%."
     ],
   },
 ];
@@ -150,7 +157,7 @@ export const experience: ExperienceEntry[] = [
 export const projects: ProjectEntry[] = [
   {
     title: "Gemstone Consultation Landing Page",
-    tech: ["Next.js", "DynamoDB"],
+    tech: ["Next.js", "DynamoDB", "AWS Amplify"],
     link: "https://gems.humarapandit.com",
     cover: "/images/gems_hp.png",
     description:
@@ -186,10 +193,10 @@ export const positions: PositionEntry[] = [
   {
     role: "Vice President",
     organization: "IMAGES (NGO by PEC Students)",
-    duration: "June 2025 – Present",
+    duration: "June 2025 – December 2025",
     logo: "/images/images_logo.jpg",
     bullets: [
-      "Led community outreach programs benefiting 200+ individuals and managed logistics and fundraising by coordinating with senior stakeholders to ensure successful execution.",
+      "Directed community outreach initiatives as NGO Vice President, co-organizing a 60+ student expedition and managing end-to-end fundraising logistics to secure and donate funds to a local blind school.",
     ],
   },
   {
@@ -242,30 +249,12 @@ export const achievements: string[] = [
 /** Placeholder blog posts — will be replaced with MDX content */
 export const blogPosts: BlogPost[] = [
   {
-    slug: "building-rag-pipelines",
-    title: "Building Production RAG Pipelines with Azure OpenAI",
+    slug: "building-unified-payment-system",
+    title: "Unified Payment System: A Developer’s Journey",
     date: "2026-05-15",
     readingTime: "8 min",
     excerpt:
-      "A deep dive into architecting retrieval-augmented generation pipelines that actually work in production — from vector embeddings to response quality.",
-    tags: ["AI/ML", "Azure", "RAG"],
-  },
-  {
-    slug: "aws-amplify-nextjs",
-    title: "Deploying Next.js on AWS Amplify: Lessons from the Trenches",
-    date: "2026-04-22",
-    readingTime: "6 min",
-    excerpt:
-      "What they don't tell you about deploying ISR-heavy Next.js apps on Amplify — caching pitfalls, cold starts, and the fixes that worked.",
-    tags: ["AWS", "Next.js", "DevOps"],
-  },
-  {
-    slug: "supabase-b2b-api",
-    title: "Designing a B2B API with Supabase and Edge Functions",
-    date: "2026-03-10",
-    readingTime: "10 min",
-    excerpt:
-      "How we built a partner-facing REST API for order and payment sync, complete with row-level security and real-time webhooks.",
-    tags: ["Supabase", "API Design", "Backend"],
+      "A deep dive into architecting unified payment system that actually work in production on all platforms.",
+    tags: ["Payments", "Banking", "Finance"],
   },
 ];

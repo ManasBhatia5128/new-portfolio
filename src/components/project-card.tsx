@@ -9,7 +9,7 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <article className="group relative flex flex-col rounded-lg border border-border/60 bg-card/50 transition-all duration-300 hover:border-border hover:shadow-lg h-full">
+    <article className="group relative flex flex-col rounded-lg border border-border/60 bg-card/50 backdrop-blur-sm transition-all duration-300 hover:border-border hover:shadow-lg h-full">
       {/* ── Cover image or fallback pattern ── */}
       <div className="relative min-h-[140px] rounded-t-lg bg-muted/30 border-b border-border/40 overflow-hidden">
         {project.cover ? (

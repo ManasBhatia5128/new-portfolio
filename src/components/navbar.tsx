@@ -41,9 +41,6 @@ export function Navbar() {
             ) : (
               <div className="h-10 w-10" />
             )}
-            <span className="group-hover:text-primary transition-colors duration-200">
-              manas
-            </span>
           </Link>
 
           {/* Desktop nav links */}
@@ -62,7 +59,7 @@ export function Navbar() {
                   key={link.href}
                   href={link.href}
                   className={cn(
-                    "relative px-3 py-1.5 text-xs font-medium rounded-md transition-colors duration-200",
+                    "relative px-3 py-1.5 text-md font-medium rounded-md transition-colors duration-200",
                     isActive
                       ? "text-primary"
                       : "text-muted-foreground hover:text-foreground"
