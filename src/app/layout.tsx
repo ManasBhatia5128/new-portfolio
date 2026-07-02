@@ -148,10 +148,6 @@ export default function RootLayout({
                   var t = localStorage.getItem('portfolio-theme');
                   if (t === 'light') {
                     document.documentElement.classList.remove('dark');
-                  } else if (!t) {
-                    if (!window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                      document.documentElement.classList.remove('dark');
-                    }
                   }
                 } catch(e) {}
               })();
