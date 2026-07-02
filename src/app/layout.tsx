@@ -29,12 +29,28 @@ export const metadata: Metadata = {
   keywords: [
     "Manas Bhatia",
     "Software Engineer",
+    "Software Development Engineer",
+    "Full-stack engineer",
     "Next.js",
     "React",
     "FastAPI",
     "AWS",
     "Portfolio",
+    "Web Development",
+    "Manas Bhatia Architect",
+    "Indian Architect",
+    "Futuristic Architecture",
+    "Sustainable Architecture",
+    "AI Architecture",
+    "Symbiotic Architecture",
   ],
+  twitter: {
+    card: "summary_large_image",
+    title: "Manas Bhatia — Software Development Engineer",
+    description:
+      "Full-stack engineer specializing in Next.js, FastAPI, and AWS cloud infrastructure.",
+    images: ["/images/logo_light_mode.png"],
+  },
   authors: [{ name: "Manas Bhatia" }],
   openGraph: {
     title: "Manas Bhatia — Software Development Engineer",
@@ -81,6 +97,31 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              name: "Manas Bhatia",
+              url: "https://manasbhatia.me",
+              jobTitle: "Software Development Engineer",
+              description: "Full-stack engineer specializing in Next.js, FastAPI, and AWS cloud infrastructure. Building high-performance web platforms and AI-powered products.",
+              sameAs: [
+                "https://linkedin.com/in/manas-bhatia",
+                "https://github.com/manasbhatia5128"
+              ],
+              knowsAbout: [
+                "Software Engineering",
+                "Web Development",
+                "Next.js",
+                "AWS",
+                "Architecture",
+                "Futuristic Architecture"
+              ]
+            })
+          }}
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: `

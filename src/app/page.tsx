@@ -15,10 +15,12 @@ import {
   skills,
   education,
   experience,
+  projects,
 } from "@/lib/data";
 import { SectionHeader } from "@/components/section-header";
 import { SkillTag } from "@/components/skill-tag";
 import { FadeIn, FadeInStagger, FadeInStaggerItem } from "@/components/fade-in";
+import { ProjectCard } from "@/components/project-card";
 
 const socialLinks = [
   {
@@ -227,6 +229,64 @@ export default function HomePage() {
             </FadeInStaggerItem>
           ))}
         </FadeInStagger>
+      </section>
+
+      {/* ── Projects Preview ───────────────────────────────────────── */}
+      <section id="projects-preview" className="mt-12 md:mt-16">
+        <FadeIn delay={0.1}>
+          <SectionHeader
+            title="Projects"
+            subtitle="Recent work and technical experiments"
+          />
+        </FadeIn>
+
+        <FadeInStagger staggerDelay={0.2} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {projects.slice(0, 2).map((project) => (
+            <FadeInStaggerItem key={project.title}>
+              <ProjectCard project={project} />
+            </FadeInStaggerItem>
+          ))}
+        </FadeInStagger>
+
+        <FadeIn delay={0.2}>
+          <div className="mt-6 flex justify-end">
+            <Link
+              href="/projects"
+              className="group inline-flex items-center gap-1.5 text-xs font-semibold text-primary transition-colors hover:text-primary/80"
+            >
+              View More
+              <ArrowRight
+                size={14}
+                weight="bold"
+                className="transition-transform group-hover:translate-x-0.5"
+              />
+            </Link>
+          </div>
+        </FadeIn>
+      </section>
+
+      {/* ── Contact Section ─────────────────────────────────────────── */}
+      <section id="contact" className="mt-20 md:mt-32 mb-8">
+        <FadeIn delay={0.1} className="flex flex-col items-center text-center">
+          <div className="mb-6 inline-flex items-center justify-center rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+            What's next?
+          </div>
+          <h2 className="mb-4 text-3xl md:text-4xl font-bold tracking-tight text-foreground">
+            Get In Touch
+          </h2>
+          <p className="mb-8 max-w-md text-sm text-muted-foreground leading-relaxed">
+            I'm always open to discussing new projects, creative ideas or opportunities to be part of your visions.
+          </p>
+          <Link
+            href="/contact"
+            className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-md border border-primary/50 bg-primary/10 px-8 py-3 font-mono text-sm font-medium text-primary transition-all hover:bg-primary/20 hover:border-primary hover:scale-105"
+          >
+            <span className="relative z-10 flex items-center gap-2">
+              <span className="opacity-70 text-primary/80">&gt;_</span>
+              Say Hello
+            </span>
+          </Link>
+        </FadeIn>
       </section>
     </div>
   );
