@@ -36,8 +36,13 @@ export default async function BlogPage() {
               <Link href={`/blog/${post.slug}`} key={post.slug} className="block group relative rounded-lg border border-transparent px-5 py-5 transition-all duration-200 hover:border-border/60 hover:bg-card/50 hover:backdrop-blur-sm">
                 <article>
                   <div className="flex flex-col md:flex-row md:items-start md:gap-6">
-                    {/* Date column */}
-                    <div className="shrink-0 mb-2 md:mb-0 md:w-28">
+                    {/* Date column and Image */}
+                    <div className="shrink-0 mb-4 md:mb-0 md:w-40">
+                      {post.coverImage ? (
+                        <div className="mb-3 w-full h-24 relative rounded-md overflow-hidden bg-muted/30">
+                          <img src={post.coverImage} alt={post.title} className="object-cover w-full h-full" />
+                        </div>
+                      ) : null}
                       <time className="text-xs font-mono text-muted-foreground/70">
                         {new Date(post.createdAt || new Date()).toLocaleDateString("en-US", {
                           month: "short",

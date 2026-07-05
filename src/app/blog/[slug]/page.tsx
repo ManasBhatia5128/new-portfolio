@@ -56,6 +56,12 @@ export default async function BlogPostPage({ params }: Props) {
             {post.title}
           </h1>
 
+          {post.coverImage && (
+            <div className="w-full relative h-64 md:h-96 rounded-xl overflow-hidden mt-6 mb-8">
+              <img src={post.coverImage} alt={post.title} className="object-cover w-full h-full" />
+            </div>
+          )}
+
           <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
             <time dateTime={post.createdAt?.toISOString()}>
               {new Date(post.createdAt || new Date()).toLocaleDateString("en-US", {
@@ -87,8 +93,21 @@ export default async function BlogPostPage({ params }: Props) {
         </div>
       </div>
 
-      <div className="prose prose-neutral dark:prose-invert prose-p:leading-relaxed prose-a:text-primary hover:prose-a:text-primary/80 prose-headings:font-bold max-w-none">
-        <ReactMarkdown>{post.content}</ReactMarkdown>
+      <div className="prose prose-neutral dark:prose-invert prose-p:leading-relaxed prose-a:text-primary hover:prose-a:text-primary/80 prose-headings:font-bold prose-img:rounded-lg prose-img:border prose-img:border-border/50 max-w-none">
+        <ReactMarkdown
+          components={{
+            img: (props) => (
+              <img
+                src={props.src}
+                alt={props.alt || ''}
+                className="w-full h-auto rounded-lg"
+                loading="lazy"
+              />
+            ),
+          }}
+        >
+          {post.content}
+        </ReactMarkdown>
       </div>
     </article>
   );
