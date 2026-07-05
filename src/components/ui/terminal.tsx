@@ -2,6 +2,8 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
+import { SpeakerHigh, SpeakerSlash } from "@phosphor-icons/react/dist/ssr";
+
 const KEY_SOUNDS_DOWN: Record<string, [number, number]> = {
   A: [31542, 85],
   B: [40621, 107],
@@ -94,33 +96,47 @@ const KEY_SOUNDS_UP: Record<string, [number, number]> = {
   Enter: [19180, 100],
 };
 
-function useAudio(enabled: boolean) {
+function useAudio(initialEnabled: boolean) {
   const ctxRef = useRef<AudioContext | null>(null);
   const bufferRef = useRef<AudioBuffer | null>(null);
-  const readyRef = useRef(false);
+  const [enabled, setEnabled] = useState(initialEnabled);
+
+  const initAudio = async () => {
+    try {
+      if (!ctxRef.current) {
+        ctxRef.current = new AudioContext();
+      }
+      if (ctxRef.current.state === "suspended") {
+        await ctxRef.current.resume();
+      }
+      if (!bufferRef.current) {
+        const res = await fetch("/sound.ogg");
+        if (res.ok) {
+          bufferRef.current = await ctxRef.current.decodeAudioData(
+            await res.arrayBuffer()
+          );
+        }
+      }
+    } catch {}
+  };
 
   useEffect(() => {
-    if (!enabled) return;
-    const init = async () => {
-      try {
-        ctxRef.current = new AudioContext();
-        const res = await fetch("/sound.ogg");
-        if (!res.ok) return;
-        bufferRef.current = await ctxRef.current.decodeAudioData(
-          await res.arrayBuffer(),
-        );
-        readyRef.current = true;
-      } catch {}
-    };
-    init();
-    return () => {
-      ctxRef.current?.close();
-    };
-  }, [enabled]);
+    if (initialEnabled) {
+      initAudio();
+    }
+  }, [initialEnabled]);
+
+  const toggleSound = () => {
+    if (!enabled) {
+      initAudio();
+      setEnabled(true);
+    } else {
+      setEnabled(false);
+    }
+  };
 
   const playSound = (sound: [number, number] | undefined) => {
-    if (!readyRef.current || !ctxRef.current || !bufferRef.current || !sound)
-      return;
+    if (!enabled || !ctxRef.current || !bufferRef.current || !sound) return;
     if (ctxRef.current.state === "suspended") ctxRef.current.resume();
     const src = ctxRef.current.createBufferSource();
     src.buffer = bufferRef.current;
@@ -133,7 +149,7 @@ function useAudio(enabled: boolean) {
   const up = (key: string) =>
     playSound(KEY_SOUNDS_UP[key.toUpperCase()] || KEY_SOUNDS_UP[key]);
 
-  return { down, up };
+  return { down, up, enabled, toggleSound };
 }
 
 function useInView(ref: React.RefObject<HTMLElement | null>, once = true) {
@@ -294,12 +310,12 @@ export function Terminal({
   typingSpeed = 50,
   delayBetweenCommands = 800,
   initialDelay = 500,
-  enableSound = true,
+  enableSound = false,
 }: TerminalProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const inView = useInView(containerRef);
-  const { down, up } = useAudio(enableSound);
+  const { down, up, enabled, toggleSound } = useAudio(enableSound);
 
   const [lines, setLines] = useState<TerminalLine[]>([]);
   const [currentText, setCurrentText] = useState("");
@@ -441,7 +457,15 @@ export function Terminal({
               {username} — bash
             </span>
           </div>
-          <div className="w-[52px]" />
+          <div className="flex w-[52px] justify-end">
+            <button
+              onClick={toggleSound}
+              className="text-neutral-500 hover:text-neutral-300 transition-colors"
+              title={enabled ? "Disable sound" : "Enable sound"}
+            >
+              {enabled ? <SpeakerHigh size={14} /> : <SpeakerSlash size={14} />}
+            </button>
+          </div>
         </div>
 
         {/* Terminal Content */}

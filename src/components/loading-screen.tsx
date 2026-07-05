@@ -125,7 +125,7 @@ export function LoadingScreen({ children }: LoadingScreenProps) {
             typingSpeed={30}
             delayBetweenCommands={400}
             initialDelay={200}
-            enableSound={true}
+            enableSound={false}
           />
         </div>
 
